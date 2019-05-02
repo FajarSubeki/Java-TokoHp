@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Struk" language="groovy" pageWidth="300" pageHeight="480" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81a0e2d3-ec2e-4a49-8fbd-8b26d09f674c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_penjualann" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     query_laporan.`nama` AS query_laporan_nama,
+     query_laporan.`nama_hp` AS query_laporan_nama_hp,
+     query_laporan.`harga_jual` AS query_laporan_harga_jual,
+     query_laporan.`ppn` AS query_laporan_ppn,
+     query_laporan.`diskon` AS query_laporan_diskon,
+     query_laporan.`id_penjualan` AS query_laporan_id_penjualan,
+     query_laporan.`jumlah` AS query_laporan_jumlah,
+     query_laporan.`total` AS query_laporan_total,
+     query_laporan.`tanggal` AS query_laporan_tanggal,
+query_laporan.`bayar` AS query_laporan_bayar,
+query_laporan.`kembalian` AS query_laporan_kembalian
+FROM
+     `query_laporan` query_laporan WHERE id_penjualan = $P{id_penjualann}]]>
+	</queryString>
+	<field name="query_laporan_nama" class="java.lang.String"/>
+	<field name="query_laporan_nama_hp" class="java.lang.String"/>
+	<field name="query_laporan_harga_jual" class="java.lang.Integer"/>
+	<field name="query_laporan_ppn" class="java.lang.Integer"/>
+	<field name="query_laporan_diskon" class="java.lang.Integer"/>
+	<field name="query_laporan_id_penjualan" class="java.lang.String"/>
+	<field name="query_laporan_jumlah" class="java.lang.Integer"/>
+	<field name="query_laporan_total" class="java.lang.Integer"/>
+	<field name="query_laporan_tanggal" class="java.sql.Date"/>
+	<field name="query_laporan_bayar" class="java.lang.Integer"/>
+	<field name="query_laporan_kembalian" class="java.lang.Integer"/>
+	<variable name="total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{query_laporan_jumlah}+$F{query_laporan_harga_jual}]]></variableExpression>
+	</variable>
+	<variable name="query_laporan_total_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{query_laporan_total}]]></variableExpression>
+	</variable>
+	<variable name="jam" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="-10" y="-11" width="115" height="20" uuid="f7c37417-54da-4680-8dd7-90dc2da67fc4"/>
+				<textElement>
+					<font fontName="Century Gothic" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HP Store Funny Sell]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="7" width="200" height="17" uuid="3f62ee4a-4675-4c40-9091-309c564efea7"/>
+				<textElement>
+					<font fontName="Century Gothic"/>
+				</textElement>
+				<text><![CDATA[Jln Raya Puncak No 56, Cisarua, Bogor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="18" width="100" height="14" uuid="cfa4e208-8407-45b2-b94e-c92c1adcfdc5"/>
+				<text><![CDATA[081233457890]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="-10" y="4" width="84" height="15" uuid="01beabcd-fdba-4acd-a1d4-5ebd7301f0f3"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kode Transaksi : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="19" width="84" height="15" uuid="3a1b2e61-ad93-48b1-a705-15cc3eb651c4"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Kasir       : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="34" width="84" height="15" uuid="71600347-45e9-4c0e-a3d5-b88cd8dfd82c"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Yth                     : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="4" width="100" height="15" uuid="7862254e-745c-4d04-b0c3-c5d4ab952a01"/>
+				<textFieldExpression><![CDATA[$F{query_laporan_id_penjualan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="19" width="65" height="15" uuid="de7a723d-3a0a-4795-9c28-80116a1bb71d"/>
+				<textFieldExpression><![CDATA[$F{query_laporan_nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="74" y="34" width="65" height="15" uuid="10b8aa8e-1e3b-4530-b4a8-d90bab6b1072"/>
+				<text><![CDATA[Pelanggan]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="147" y="4" width="125" height="15" uuid="57ac3910-ba41-46b0-ba51-f11292f82942"/>
+				<textFieldExpression><![CDATA[$F{query_laporan_tanggal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement x="-10" y="0" width="280" height="1" uuid="f7735d98-cde4-4082-b85d-204b27a5b511"/>
+			</line>
+			<line>
+				<reportElement x="-10" y="16" width="280" height="1" uuid="cc2619ae-9169-4293-82aa-304eadf58efc"/>
+			</line>
+			<staticText>
+				<reportElement x="-10" y="1" width="59" height="16" uuid="79fd6d14-1fb6-4d0a-9a12-4049d7330a45"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama HP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="0" width="22" height="16" uuid="e13ce6cd-33a3-4ac1-8b48-ce8bc9d79dc9"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="0" width="22" height="16" uuid="a8a3c5ef-ca9c-4213-aba2-5eb37de570e1"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="0" width="35" height="16" uuid="319c8ef7-7357-4f7e-b4d2-10fab8b4eebd"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="2" width="35" height="16" uuid="4751ef62-ce17-4ec1-b734-418cae61b7ef"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="117" y="3" width="19" height="15" uuid="3cf95451-3dbf-4d70-a73f-63452a6a75ff"/>
+				<textFieldExpression><![CDATA[$F{query_laporan_jumlah}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="3" width="19" height="15" uuid="ffd3ef59-ed64-4cbc-9f21-61b0520d63a4"/>
+				<textFieldExpression><![CDATA[$F{query_laporan_diskon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="160" y="3" width="55" height="15" uuid="112989c0-9b42-4ef8-b98e-940acf4fe9af"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{query_laporan_harga_jual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-10" y="3" width="127" height="16" uuid="87c957ca-9a2c-4d4e-aa78-d0ac5111302c"/>
+				<textFieldExpression><![CDATA[$F{query_laporan_nama_hp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="215" y="3" width="55" height="15" uuid="9f72e0a0-e567-47a7-a59e-e6a3768dced4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{query_laporan_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="91" width="260" height="16" uuid="827317c7-cfe6-46a9-a03c-b2463a30af15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century Gothic" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[~ Terimakasih ~]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="75" width="260" height="16" uuid="682821a2-b494-4fa2-b5ff-3ac11e2c9226"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Barang yang sudah dibeli tidak dapat dikembalikan !]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="7" width="44" height="16" uuid="ec7eb455-45da-422f-85de-8b50c28caa61"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PPN 10%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="22" width="58" height="16" uuid="92be6f1c-801f-4d8b-8692-7a473a8047d0"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="35" width="73" height="16" uuid="ed0ec553-ceea-4ed7-9717-7d4c4195aa2a"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pembayaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="51" width="73" height="16" uuid="ad862389-bd22-4918-865a-c33c5142fc51"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kembalian]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="216" y="35" width="55" height="15" uuid="599e1bab-f090-4e4f-9ead-c45312459a52"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{query_laporan_bayar}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="216" y="50" width="55" height="15" uuid="002308fe-5f33-4162-8f60-d3cb540f5109"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{query_laporan_kembalian}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-9" y="3" width="280" height="1" uuid="e9191bcd-d617-4890-aa8e-8c149fc27eb6"/>
+			</line>
+			<staticText>
+				<reportElement x="199" y="22" width="17" height="16" uuid="dc6bd94c-9b8b-4351-a3e3-3d19800e9081"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="34" width="17" height="16" uuid="42a2ce72-db68-4481-ad10-69353126f7a2"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="49" width="17" height="16" uuid="fefe783e-c160-4664-99c7-f7bd87ec94a7"/>
+				<textElement>
+					<font fontName="Century Gothic" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-12" y="70" width="280" height="1" uuid="df3bd191-0ce4-47f5-ac46-25945dee8b44"/>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="216" y="22" width="56" height="13" uuid="6f84450f-0fe2-4d51-b9da-632bf2ab5f9f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{query_laporan_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
